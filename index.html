@@ -1,19 +1,8 @@
 <!DOCTYPE html>
-
 <html>
   <head>
-    
-    <img src="surrey logo.png" alt="Banner" width="600" height="100">
-    
-    <h1><b>ENG0018 Computer Laboratory 2025/26</b></h1>
-    
-    <h2>Student URN: 6868969</h2>
-    
-    <hr>
-    <h2 style="font-family:calibri;"><b>Conference paper: How Generative AI is Transforming the Way Programmers Write Code</b></h2>
-    <hr>
-    
-<!style for tables>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
       table {
         font-family: arial, sans-serif;
@@ -28,26 +17,35 @@
       }
 
       tr:nth-child(even) {
-        background-color: #dddddd
+        background-color: #dddddd;
+      }
+
+      p.ex1 {
+        margin-left: 250px;
+      }
+
+      .myslides {
+        display: none;
       }
     </style>
+  </head>
 
-      <style>
-p.ex1{
-  margin-left: 250px;
-}
-</style>
+  <body style="background-color:#FFFFFF; margin-left:50px;">
 
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-      <style>
-        .myslides {display:none;}
-      </style>
-    
-      <body style="background-color:#FFFFFF;margin-left:50px;">
-      <h3 id="Abstract">Abstract</h3>
+    <img src="surrey logo.png" alt="Banner" width="600" height="100">
 
-      <p class="ex1">
+    <h1><b>ENG0018 Computer Laboratory 2025/26</b></h1>
+    <h2>Student URN: 6868969</h2>
+
+    <hr>
+    <h2 style="font-family:calibri;">
+      <b>Conference paper: How Generative AI is Transforming the Way Programmers Write Code</b>
+    </h2>
+    <hr>
+
+    <h3 id="Abstract">Abstract</h3>
+
+    <p class="ex1">
       <pre>
         Generative AI such as Copilot and ChatGPT are all tools that we are quite familiar with, 
         this is especially true for computer science students as they are revolutionising the process 
@@ -58,93 +56,77 @@ p.ex1{
         are conducted in an educational setting, and investigates where AI has been used to support learning 
         and how it has been used. 
       </pre>
-      </p>
+    </p>
 
-  </head>
+    <!-- ////////////////////////////////////////////////////////////////////////// -->
+    <!-- /////////////////////////// Last update section ////////////////////////// -->
+    <!-- ////////////////////////////////////////////////////////////////////////// -->
+    <div id="last-updated">Loading last update time...</div>
+    <button onclick="verifyLastUpdatedTime()" style="display: block; margin: 10px auto; padding: 8px 16px;">
+      Verify Last Modified Time
+    </button>
 
-  <body>
-  </body>
-
-  <!-- //////////////////////////////////////////////////////////////////////////////// -->
-  <!-- ////////////////////////////// Adding last update ////////////////////////////// -->
-  <!-- //////////////////////////////////////////////////////////////////////////////// -->
-    <!-- Last commit time display -->
-<div id="last-updated">Loading last update time...</div>
-<!-- Verify Button -->
-<button onclick="verifyLastUpdatedTime()" style="display: block; margin: 10px auto; padding: 8px 16px;">
-    Verify Last Modified Time
-</button>
-<script>
-    async function getLastUpdatedTime() {
-        const username = 'nr0025';
-        const repo = 'FY0025';
-       
+    <script>
+      async function getLastUpdatedTime() {
+        const username = 'FEPSFY6868969';
+        const repo = 'FY6868969';
         const url = `https://api.github.com/repos/${username}/${repo}/commits`;
+
         try {
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/vnd.github.v3+json',
-                }
-            });
-            if (!response.ok) {
-                throw new Error(`Error fetching data: ${response.status} - ${response.statusText}`);
+          const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/vnd.github.v3+json',
             }
-            const commits = await response.json();
-            if (commits && commits.length > 0) {
-                const lastCommitDate = new Date(commits[0].commit.committer.date);
-               
-                // Displaying the time on load
-                document.getElementById('last-updated').innerText = `Last Modified Time: ${lastCommitDate.toLocaleString()}`;
-            } else {
-                document.getElementById('last-updated').innerText = 'No commits found in the repository.';
-            }
+          });
+
+          if (!response.ok) {
+            throw new Error(`Error fetching data: ${response.status} - ${response.statusText}`);
+          }
+
+          const commits = await response.json();
+          if (commits && commits.length > 0) {
+            const lastCommitDate = new Date(commits[0].commit.committer.date);
+            document.getElementById('last-updated').innerText = `Last Modified Time: ${lastCommitDate.toLocaleString()}`;
+          } else {
+            document.getElementById('last-updated').innerText = 'No commits found in the repository.';
+          }
         } catch (error) {
-            console.error('Error fetching the last updated time:', error);
-            document.getElementById('last-updated').innerText = 'Error fetching update time. Please check the repository details.';
+          console.error('Error fetching the last updated time:', error);
+          document.getElementById('last-updated').innerText = 'Error fetching update time. Please check the repository details.';
         }
-    }
-    // Function to verify the last update time by re-fetching it from the API
-    async function verifyLastUpdatedTime() {
+      }
+
+      async function verifyLastUpdatedTime() {
         document.getElementById('last-updated').innerText = 'Verifying...';
         await getLastUpdatedTime();
         alert("Last modified time has been successfully verified from GitHub API.");
-    }
-    // Initial load to display the time on page load
-    window.onload = getLastUpdatedTime;
-</script>
+      }
 
+      window.onload = getLastUpdatedTime;
+    </script>
 
- <!-- //////////////////////////////////////////////////////////////////////////////// -->
-  <!-- ////////////////////////////// Word count function ////////////////////////////// -->
-  <!-- //////////////////////////////////////////////////////////////////////////////// -->
-<!-- Placeholder for total word count -->
-<p id="totalWordCount"></p>
-<hr>
-<script>
-  // Function to calculate and display word count for a specified section
-  function displayWordCount(sectionId, outputId) {
-    // Get the text content from the specified section
-    const text = document.getElementById(sectionId).textContent;
-    // Split text into words based on spaces and filter out any empty strings
-    const wordArray = text.trim().split(/\s+/);
-    // Count the words
-    const wordCount = wordArray.length;
-    // Return the word count for summing purposes
-    return wordCount;
-  }
-  // Function to calculate and display total word count from selected sections
-  function displayTotalWordCount() {
-    // Calculate word count for each section and accumulate the total
-    const IntroductionCount = displayWordCount("Introduction_InText");
-    const AnalysisCount = displayWordCount("Analysis_InText");
-    // Calculate the sum of all selected sections
-    const totalWordCount = IntroductionCount + AnalysisCount;
-    // Display the total word count
-    document.getElementById("totalWordCount").innerText = `Total word count: ${totalWordCount}`;
-  
-  <script>
-  </script>
+    <!-- ////////////////////////////////////////////////////////////////////////// -->
+    <!-- /////////////////////////// Word count function ////////////////////////// -->
+    <!-- ////////////////////////////////////////////////////////////////////////// -->
+    <p id="totalWordCount"></p>
+    <hr>
 
-  
+    <script>
+      function displayWordCount(sectionId, outputId) {
+        const text = document.getElementById(sectionId).textContent;
+        const wordArray = text.trim().split(/\s+/);
+        const wordCount = wordArray.length;
+        return wordCount;
+      }
+
+      function displayTotalWordCount() {
+        const IntroductionCount = displayWordCount("Introduction_InText");
+        const AnalysisCount = displayWordCount("Analysis_InText");
+        const totalWordCount = IntroductionCount + AnalysisCount;
+        document.getElementById("totalWordCount").innerText = `Total word count: ${totalWordCount}`;
+      }
+    </script>
+
+  </body>
 </html>
